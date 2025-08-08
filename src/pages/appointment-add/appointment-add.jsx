@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../components/navbar/navbar.jsx";
 import { useEffect, useState } from "react";
-import api from "../../constants/api.js"; // Importando a instância do Axios
+import api from "../../constants/api.js"; 
 
 function AppointmentAdd() {
     const navigate = useNavigate();
@@ -24,12 +24,12 @@ function AppointmentAdd() {
                 setUsers(response.data);
             }
         } catch (error) {
-            console.error("Erro ao listar usuários:", error); // Logando o erro completo
+            console.error("Erro ao listar usuários:", error); 
             if (error.response?.data.error) {
                 if (error.response.status == 401)
-                    return navigate("/"); // Redireciona se o token for inválido ou expirado
+                    return navigate("/"); 
     
-                alert(error.response?.data.error); // Exibe o erro para o usuário
+                alert(error.response?.data.error);
             } else {
                 alert("Erro ao listar usuários.");
             }
@@ -39,19 +39,19 @@ function AppointmentAdd() {
 
     async function LoadDoctors() {
         try {
-            const response = await api.get("/doctors"); // Requisição para listar os médicos
+            const response = await api.get("/doctors");
 
             if (response.data) {
                 setDoctors(response.data);
 
-                // Se for modo de alteração, carrega os dados do agendamento
+                
                 if (id_appointment > 0)
                     LoadAppointment(id_appointment);
             }
         } catch (error) {
             if (error.response?.data.error) {
                 if (error.response.status == 401)
-                    return navigate("/"); // Redireciona se o token for inválido ou expirado
+                    return navigate("/");
 
                 alert(error.response?.data.error);
             }
@@ -62,7 +62,7 @@ function AppointmentAdd() {
 
     async function LoadAppointment(id) {
         try {
-            const response = await api.get(`/admin/appointment/${id}`); // Requisição para carregar o agendamento
+            const response = await api.get(`/admin/appointment/${id}`); 
 
             if (response.data) {
                 setIdUser(response.data.id_user);
@@ -73,7 +73,7 @@ function AppointmentAdd() {
             }
         } catch (error) {
             if (error.response?.data.error) {
-                if (error.response.status === 401) return navigate("/"); // Redireciona se o token for inválido ou expirado
+                if (error.response.status === 401) return navigate("/"); 
 
                 alert(error.response?.data.error);
             } else {
@@ -86,14 +86,14 @@ function AppointmentAdd() {
         if (!id) return;
 
         try {
-            const response = await api.get(`/doctors/${id}/services`); // Requisição para carregar os serviços de um médico
+            const response = await api.get(`/doctors/${id}/services`);
 
             if (response.data) {
                 setServices(response.data);
             }
         } catch (error) {
             if (error.response?.data.error) {
-                if (error.response.status === 401) return navigate("/"); // Redireciona se o token for inválido ou expirado
+                if (error.response.status === 401) return navigate("/"); 
 
                 alert(error.response?.data.error);
             } else {
@@ -112,15 +112,15 @@ function AppointmentAdd() {
         };
 
         try {
-            const response = await api.post("/admin/appointments", json); // Requisição para salvar o agendamento
+            const response = await api.post("/admin/appointments", json); 
 
             if (response.data) {
-                navigate("/appointments"); // Redireciona para a lista de agendamentos
+                navigate("/appointments"); 
             }
         } catch (error) {
             if (error.response?.data.error) {
                 if (error.response.status == 401)
-                    return navigate("/"); // Redireciona se o token for inválido ou expirado
+                    return navigate("/"); 
 
                 alert(error.response?.data.error);
             }
@@ -132,12 +132,12 @@ function AppointmentAdd() {
     }
 
     useEffect(() => {
-        LoadUsers(); // Carrega os usuários ao montar o componente
-        LoadDoctors(); // Carrega os médicos ao montar o componente
+        LoadUsers(); 
+        LoadDoctors();
     }, []);
 
     useEffect(() => {
-        LoadServices(idDoctor); // Carrega os serviços sempre que o médico for alterado
+        LoadServices(idDoctor); 
     }, [idDoctor]);
 
     return (
@@ -218,7 +218,7 @@ function AppointmentAdd() {
                                 <option value="">Horário</option>
                                 <option value="08:00">08:00</option>
                                 <option value="08:30">08:30</option>
-                                {/* Adicionar as outras opções de horário */}
+                                
                             </select>
                         </div>
                     </div>
