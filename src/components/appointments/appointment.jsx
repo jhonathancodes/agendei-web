@@ -1,11 +1,9 @@
 function Appointment(props) {
-    // Concatena a data e hora para formar uma string de data válida
+   
     const dateTimeString = `${props.booking_date}T${props.booking_hour}:00`;
-
-    // Cria um objeto Date a partir da string de data e hora
+  
     const dt = new Date(dateTimeString);
 
-    // Usa o método `toLocaleString` para formatar a data
     const formattedDate = dt.toLocaleString('pt-BR', {
         day: '2-digit',
         month: '2-digit',
